@@ -1,14 +1,16 @@
 package africa.semicolon.ofofo;
 
 import africa.semicolon.ofofo.controllers.PostController;
-import africa.semicolon.ofofo.dtos.requests.CreatePostRequest;
+import africa.semicolon.ofofo.dtos.requests.CreatePostRequestDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import javax.swing.*;
 import java.util.Scanner;
 
 @SpringBootApplication
+@EnableMongoRepositories
 public class Main {
     private static final Scanner keyboardInput = new Scanner(System.in);
     private static final PostController postController = new PostController();
@@ -47,9 +49,7 @@ public class Main {
     private static void viewPost() {
         String userInput = input("Enter post id");
         print(postController.viewPost(
-                Integer.parseInt(
                         String.valueOf(userInput.charAt(0))
-                )
         ).toString());
         displayMainMenu();
     }
@@ -57,8 +57,8 @@ public class Main {
     private static void createPost() {
         String title = input("Enter post title");
         String body = input("Enter post body");
-        CreatePostRequest createPostRequest = new CreatePostRequest(title, body);
-        print(postController.createPost(createPostRequest));
+        CreatePostRequestDTO createPostRequestDTO = new CreatePostRequestDTO(title, body);
+        print(postController.createPost(createPostRequestDTO));
         displayMainMenu();
     }
 
