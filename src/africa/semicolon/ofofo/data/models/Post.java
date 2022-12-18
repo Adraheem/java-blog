@@ -24,7 +24,7 @@ public class Post {
     public String toString() {
         return String.format("""
                 =================================================
-                id: %d
+                id: %s
                 title: %s
                 body: %s
                 creationTime: %s
